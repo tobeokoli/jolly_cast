@@ -34,6 +34,30 @@ The application follows clean architecture principles with clear separation of c
 - 📡 **Robust Networking** — Dio-based HTTP client with automatic token injection and error handling
 - ❄️ **Immutable Models** — Freezed-generated models for type safety and code generation
 
+## Screenshots
+
+Below are screenshots from the current app build (tap/click to view full-size):
+
+- **Login screen**
+
+   ![Login view](assets/images/login-view.png)
+
+- **Discover (Trending & Editor's pick)**
+
+   ![Discover view](assets/images/discover-view.png)
+
+- **Mini player (bottom bar)**
+
+   ![Mini player view](assets/images/mini-player-view.png)
+
+- **Full player**
+
+   ![Player view](assets/images/player-view.png)
+
+Notes:
+
+- The Discover view implements pull-to-refresh to reload the trending episodes and editor's pick feeds. Pulling down on the list will refresh the content and update the mini-player and lists accordingly.
+
 ## Getting Started
 
 ### Prerequisites
