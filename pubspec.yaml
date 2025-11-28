@@ -1,0 +1,38 @@
+name: jolly_cast
+description: 'A podcast streaming and discovery mobile application built with Flutter.'
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  go_router: ^17.0.0
+  get_it: ^9.1.0
+  flutter_svg: ^2.2.3
+  dio: ^5.9.0
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^4.2.1
+  just_audio: ^0.10.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
+  build_runner: ^2.5.4
+
+  flutter_lints: ^5.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/logos/
+    - assets/icons/
