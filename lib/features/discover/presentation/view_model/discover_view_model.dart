@@ -18,10 +18,10 @@ class DiscoverViewModel extends JollyViewModel {
 
   DiscoverViewModel(this.getEditorsPick, this.getTrendingEpisodes);
 
-  late Command0<void>? _getEditorsPickCommand;
+  Command0<void>? _getEditorsPickCommand;
   Command0<void>? get getEditorsPickCommand => _getEditorsPickCommand;
 
-  late Command0<void>? _getTrendingEpisodesCommand;
+  Command0<void>? _getTrendingEpisodesCommand;
   Command0<void>? get getTrendingEpisodesCommand => _getTrendingEpisodesCommand;
 
   Episode? _editorsPickEpisode;
