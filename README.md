@@ -47,7 +47,7 @@ The application follows clean architecture principles with clear separation of c
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/tobeokoli/jolly_cast.git
    cd jolly_cast
    ```
 
