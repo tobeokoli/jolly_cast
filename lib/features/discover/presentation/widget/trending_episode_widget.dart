@@ -18,7 +18,7 @@ class TrendingEpisodeWidget extends StatelessWidget {
       children: [
         Container(
           width: screenWidth * JollySizes.s0_6,
-          height: screenHeight * JollySizes.s0_35,
+          height: screenHeight * JollySizes.s0_4,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(JollySizes.s12)),
           child: Stack(
             children: [

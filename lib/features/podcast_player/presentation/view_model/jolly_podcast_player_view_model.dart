@@ -36,6 +36,12 @@ class JollyPodcastPlayerViewModel extends JollyViewModel with JollyDurationMixin
   StreamSubscription<Duration>? _positionSub;
   StreamSubscription<Duration?>? _durationSub;
 
+  bool _isScrubbing = false;
+  bool get isScrubbing => _isScrubbing;
+
+  Duration? _scrubPosition;
+  Duration? get scrubPosition => _scrubPosition;
+
   int get _currentIndex {
     if (_trendingEpisodes == null || _episode == null) return -1;
     return _trendingEpisodes!.indexWhere((e) => e.id == _episode!.id);
@@ -49,8 +55,10 @@ class JollyPodcastPlayerViewModel extends JollyViewModel with JollyDurationMixin
       notifyListeners();
     }
     _positionSub = _audioPlayer.positionStream.listen((pos) {
-      _position = pos;
-      notifyListeners();
+      if (!_isScrubbing) {
+        _position = pos;
+        notifyListeners();
+      }
     });
     _durationSub = _audioPlayer.durationStream.listen((dur) {
       if (dur != null) {
@@ -120,34 +128,45 @@ class JollyPodcastPlayerViewModel extends JollyViewModel with JollyDurationMixin
     notifyListeners();
   }
 
+  void startScrubbing() {
+    _isScrubbing = true;
+  }
+
   void updateScrubPosition(Duration newPosition) {
-    _position = newPosition;
+    _scrubPosition = newPosition;
     notifyListeners();
   }
 
-  void seekTo(Duration newPosition) async {
-    final clamped = newPosition < Duration.zero ? Duration.zero : (newPosition > _duration ? _duration : newPosition);
-
-    await _audioPlayer.seek(clamped);
-    _position = clamped;
+  void endScrubbing() async {
+    if (_scrubPosition != null) {
+      await _audioPlayer.seek(_scrubPosition);
+      _position = _scrubPosition!;
+    }
+    _scrubPosition = null;
+    _isScrubbing = false;
     notifyListeners();
   }
 
   void playNext() async {
-    if (_trendingEpisodes == null || _trendingEpisodes!.isEmpty) return;
+    if (_trendingEpisodes == null || _trendingEpisodes!.isEmpty) {
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.pause();
+      _position = Duration.zero;
+      notifyListeners();
+      return;
+    }
 
     final index = _currentIndex;
 
-    // If no episode selected, start with first
     if (index == -1) {
       setEpisode(_trendingEpisodes!.first);
       return;
     }
 
-    // If next episode exists
     final nextIndex = index + 1;
     if (nextIndex < _trendingEpisodes!.length) {
       setEpisode(_trendingEpisodes![nextIndex]);
+      return;
     }
   }
 

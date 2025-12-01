@@ -100,8 +100,10 @@ class JollyPodcastPlayer extends StatelessWidget {
                             JollySlider(
                               position: viewModel.position,
                               duration: viewModel.duration,
+                              scrubPosition: viewModel.scrubPosition,
+                              onScrubStart: (value) => viewModel.startScrubbing(),
                               onScrub: (value) => viewModel.updateScrubPosition(value),
-                              onScrubEnd: (value) => viewModel.seekTo(value),
+                              onScrubEnd: (value) => viewModel.endScrubbing(),
                             ),
                             SizedBox(height: JollySizes.s6),
                             Row(
